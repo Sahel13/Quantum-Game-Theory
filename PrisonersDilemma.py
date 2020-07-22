@@ -1,7 +1,6 @@
 import numpy as np
 import math
 import cmath
-import matplotlib.pyplot as plt
 
 def Hermitian(matrix):
 	"""
