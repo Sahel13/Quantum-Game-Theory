@@ -15,14 +15,14 @@ class PrisonersDilemma():
 		self.J = None
 		self.U_A = None
 		self.U_B = None
-		self.output = None
+		self.Output = None
 
 		# Basis states
 		self.C = np.array([1,0])
 		self.D = np.array([0,1])
 
 		# Possible inputs and outputs (as combinations of the basis states)
-		self.gameStates = {
+		self.GameStates = {
 			'CC': np.kron(self.C, self.C),
 			'CD': np.kron(self.C, self.D),
 			'DC': np.kron(self.D, self.C),
@@ -72,18 +72,18 @@ class PrisonersDilemma():
 		self.U_B = self.playerMove(theta, phi)
 
 	def setOutput(self):
-		initialState = np.matmul(self.J, self.gameStates['CC'])
+		initialState = np.matmul(self.J, self.GameStates['CC'])
 		gameMoves = np.kron(self.U_A, self.U_B)
 		lastStep = np.matmul(Hermitian(self.J), gameMoves)
 		output = np.matmul(lastStep, initialState)
-		self.output = output
+		self.Output = output
 
 	def expectedPayoff(self):
 		self.setOutput()
 		alice = 0
 		bob = 0
-		for key in self.gameStates:
-			amplitude = np.dot(self.gameStates[key], self.output)
+		for key in self.GameStates:
+			amplitude = np.dot(self.GameStates[key], self.Output)
 			alice += self.PayoffMatrix[key][0] * abs(amplitude)**2
 			bob += self.PayoffMatrix[key][1] * abs(amplitude)**2
 		return (alice, bob)
