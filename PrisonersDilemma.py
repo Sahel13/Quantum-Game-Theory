@@ -8,6 +8,7 @@ def Hermitian(matrix):
 	"""
 	return matrix.conjugate().transpose()
 
+
 class PrisonersDilemma():
 
 	def __init__(self):
@@ -92,6 +93,7 @@ class PrisonersDilemma():
 		output = np.matmul(lastStep, initialState)
 
 		self.Output = output
+
 
 	def expectedPayoff(self):
 		"""
